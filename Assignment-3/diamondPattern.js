@@ -1,7 +1,19 @@
-function printDiamondPattern(){
+const readline = require('node:readline');
+const rl = readline.createInterface({
+    input:process.stdin,
+    output:process.stdout
+});
+
+rl.question('Enter Number ',(str)=>{
+    const num = Number(str);
+    printDiamondPattern(num);
+    rl.close();
+});
+
+function printDiamondPattern(n){
 let obj = new Object();
 
-for(let i=1;i<=5;i++){
+for(let i=1;i<=n;i++){
     let str = '';
     for(let j=1;j<=i;j++){
         str+='* ';
@@ -9,26 +21,23 @@ for(let i=1;i<=5;i++){
     obj[i]=str;
 }
 
-//console.log(obj);
 
-for(let i=1;i<=5;i++){
+for(let i=1;i<=n;i++){
     let gap = '';
-    for(let j=0;j<5-(i%5);j++){
+    for(let j=0;j<n-(i%n);j++){
         gap+=' ';
     }
-    if(i==5)continue;
-    console.log(gap+obj[i%5]);
+    if(i==n)continue;
+    console.log(gap+obj[i%n]);
 }
 
-console.log(obj[5]);
+console.log(obj[n]);
 
-for(let i=4;i>=1;i--){
+for(let i=n-1;i>=1;i--){
     let gap = '';
-    for(let j=5-i;j>=1;j--){
+    for(let j=n-i;j>=1;j--){
         gap+=' ';
     }
     console.log(gap+obj[i]);
  }
 }
-
-printDiamondPattern();

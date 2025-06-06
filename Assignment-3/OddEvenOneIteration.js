@@ -1,7 +1,17 @@
+const readline = require('node:readline');
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-function oddEvenOneIteration(){
+rl.question('Enter Number ',(str)=>{
+    const num = Number(str);
+    oddEvenOneIteration(num);
+    rl.close();
+});
+
+function oddEvenOneIteration(n){
     let flag = 1;
-    let n = 20;
 for(let i=-n ;i<=n ;i++){
     if(flag){
         if(Math.abs(i)%2==0)console.log(Math.abs(i));
@@ -13,4 +23,4 @@ for(let i=-n ;i<=n ;i++){
  }
 }
 
-oddEvenOneIteration();
+// oddEvenOneIteration();
