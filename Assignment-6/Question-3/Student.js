@@ -4,8 +4,9 @@ class Student extends Person{
         super(name,age,gender);
         this.studies = studies;
     }
+   
     greeting(){
-        console.log(`This is ${this.name}. I study ${this.studies}`);
+        console.log(`This is ${this.name}. I study ${this.intrest}`);
     }
 }
 

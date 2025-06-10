@@ -1,9 +1,10 @@
-export class Person{
-    constructor(name,age,gender,intrest){
+ export class Person{
+    constructor(name,age,gender,intrest,studies){
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.intrest = intrest;
+        
     }
 
     greeting(){
@@ -12,7 +13,7 @@ export class Person{
     farewell(){
         console.log(`GoodBye from ${this.name}`);
     }
-};
+}
 
 // let person = new Person('Parth',22,'Male','ABC');
 // person.greeting();
