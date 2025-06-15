@@ -1,39 +1,36 @@
-let processingQueue = [];
-let standByQueue = [];
-let n = 5;
+let limit = 3;
+let q = [];
+let current = 0;
 
-function pushRequest(req){
-    if(processingQueue.length >= 5){
-        standByQueue.push(req);
-    }else{
-        processingQueue.push(req);
+function processRequest(req){
+    current+=1;
+    req()
+    .then((data)=>console.log(data))
+    .catch((err)=>console.log(err))
+    .finally(()=>{
+        current-=1;
+        dispatch();
+    })
+}
+
+function dispatch(){
+    while(current < limit && q.length > 0){
+        const task = q.shift();
+        processRequest(task);
     }
 }
 
-async function processRequest(){
-    let arr = processingQueue.map((a) => a.promise);
-    processingQueue = [];
-    const data = await Promise.allSettled(arr);
-    console.log(data);
-
-    while(processingQueue.length < 5 && standByQueue.length > 0){
-        processingQueue.push(standByQueue.shift());
+for(let i=0;i<10;i++){
+    let req = () => {
+        let id = i;
+        return new Promise((resolve)=>{
+            console.log(`started ${id}`);
+            setTimeout(()=>{
+                resolve(`Ended ${id}`);
+            },5000);
+        })
     }
-
-    if(processingQueue.length > 0)processRequest();
+    q.push(req);
 }
 
-for(let i=0;i<10;i+=1){
-    let p = new Promise((resolve)=>{
-        setTimeout(()=>{
-            resolve(`Resolved After ${i} sec`)
-        },i*1000);
-    });
-    let req = {
-        id : i,
-        promise: p
-    }
-    pushRequest(req);
-}
-
-processRequest();
+dispatch();
