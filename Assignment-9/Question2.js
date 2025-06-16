@@ -1,4 +1,4 @@
-const _ = require('lodash');
+const _ = require('./modules/node_modules/lodash');
 
 let obj = {
     a : 1,
